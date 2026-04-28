@@ -171,3 +171,66 @@ svg {
   background-color: var(--bs-black);
   fill: white;
 }
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.intro {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.intro h1 {
+  color: var(--bs-crete);
+  font-family: var(--bs-font-serif);
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.media-card {
+  flex: 1 1 300px; /* Esto hace que las tarjetas sean responsivas */
+  background-color: var(--bs-gray-100);
+  padding: 1rem;
+  border-radius: var(--bs-border-radius);
+  text-align: center;
+}
+
+.media-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--bs-border-radius-sm);
+}
+
+.media-card h3 {
+  margin: 1rem 0;
+  color: var(--bs-link-color);
+}
+
+#park-footer {
+  background-color: var(--bs-grey-5);
+  background-image: url("../images/topo_pattern.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  color: var(--bs-white);
+  padding: 3rem 1rem;
+  margin-top: 2rem;
+}
+
+.contact-info h3, .contact-info h4 {
+  color: var(--bs-cape-honey);
+  margin-bottom: 0.5rem;
+}
+
+.contact-info p {
+  margin-bottom: 1.5rem;
+}
