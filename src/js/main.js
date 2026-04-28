@@ -1,31 +1,16 @@
-import { getParkData } from "./parkService.mjs";
-import { mediaCardTemplate } from "./templates.mjs"; // Importamos tu nuevo archivo
+import { getParkData, getParkInfoLinks } from "./parkService.mjs";
+import { mediaCardTemplate } from "./templates.mjs";
 
 const parkData = getParkData();
+const links = getParkInfoLinks(parkData);
 
-//
-const parkInfoLinks = [
-  {
-    name: "Current Conditions &#x203A;",
-    link: "conditions.html",
-    image: parkData.images[2].url,
-    description: "See what conditions to expect in the park before leaving on your trip!"
-  },
-  {
-    name: "Fees and Passes &#x203A;",
-    link: "fees.html",
-    image: parkData.images[3].url,
-    description: "Learn about the fees and passes that are available."
-  },
-  {
-    name: "Visitor Centers &#x203A;",
-    link: "visitor_centers.html",
-    image: parkData.images[9].url,
-    description: "Learn about the visitor centers in the park."
-  }
-];
+function init() {
+    setHeaderInfo(parkData);
+    setParkIntro(parkData);
+    setParkInfoLinks(links);
+    setParkFooter(parkData);
+}
 
-//
 function setHeaderInfo(data) {
     document.querySelector("head > title").textContent = data.fullName;
     const heroImg = document.querySelector(".hero-banner img");
@@ -36,16 +21,12 @@ function setHeaderInfo(data) {
 }
 
 function setParkIntro(data) {
-    document.querySelector(".intro").innerHTML = `
-        <h1>${data.fullName}</h1>
-        <p>${data.description}</p>
-    `;
+    document.querySelector(".intro").innerHTML = `<h1>${data.fullName}</h1><p>${data.description}</p>`;
 }
 
-function setParkInfoLinks(links) {
+function setParkInfoLinks(data) {
     const infoEl = document.querySelector(".info");
-    //
-    const html = links.map(mediaCardTemplate);
+    const html = data.map(mediaCardTemplate);
     infoEl.innerHTML = html.join("");
 }
 
@@ -61,12 +42,7 @@ function setParkFooter(data) {
             <p>${mailing.line1}<br>${mailing.city}, ${mailing.stateCode} ${mailing.postalCode}</p>
             <h4>Phone:</h4>
             <p>${voice.phoneNumber}</p>
-        </section>
-    `;
+        </section>`;
 }
 
-//
-setHeaderInfo(parkData);
-setParkIntro(parkData);
-setParkInfoLinks(parkInfoLinks);
-setParkFooter(parkData);
+init();
