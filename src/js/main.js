@@ -1,48 +1,43 @@
-import { getParkData, getParkInfoLinks } from "./parkService.mjs";
+import { getParkData } from "./parkService.mjs";
 import { mediaCardTemplate } from "./templates.mjs";
 
 const parkData = getParkData();
-const links = getParkInfoLinks(parkData);
+
+function parkInfoTemplate(info) {
+  return `
+    <a href="/" class="hero-banner__title">${info.name}</a>
+    <p class="hero-banner__subtitle">
+        <span>${info.designation}</span>
+        <span>${info.states}</span>
+    </p>`;
+}
 
 function init() {
-    setHeaderInfo(parkData);
-    setParkIntro(parkData);
-    setParkInfoLinks(links);
+    const disclaimer = document.querySelector(".disclaimer > a");
+    disclaimer.href = parkData.url;
+    disclaimer.innerHTML = parkData.fullName;
+    document.title = parkData.fullName;
+
+    document.querySelector(".hero-banner img").src = parkData.images[0].url;
+    document.querySelector(".hero-banner__content").innerHTML = parkInfoTemplate(parkData);
+
+    document.querySelector(".intro").innerHTML = `<h1>${parkData.fullName}</h1><p>${parkData.description}</p>`;
+    
+    const infoLinks = [
+        { name: "Conditions", link: "#", image: parkData.images[2].url, description: "Current conditions info." },
+        { name: "Fees", link: "#", image: parkData.images[3].url, description: "Fee information." },
+        { name: "Visitor Centers", link: "#", image: parkData.images[9].url, description: "Visitor center locations." }
+    ];
+    document.querySelector(".info").innerHTML = infoLinks.map(mediaCardTemplate).join("");
+
     setParkFooter(parkData);
-}
-
-function setHeaderInfo(data) {
-    document.querySelector("head > title").textContent = data.fullName;
-    const heroImg = document.querySelector(".hero-banner img");
-    if (heroImg) {
-        heroImg.src = data.images[0].url;
-        heroImg.alt = data.images[0].altText;
-    }
-}
-
-function setParkIntro(data) {
-    document.querySelector(".intro").innerHTML = `<h1>${data.fullName}</h1><p>${data.description}</p>`;
-}
-
-function setParkInfoLinks(data) {
-    const infoEl = document.querySelector(".info");
-    const html = data.map(mediaCardTemplate);
-    infoEl.innerHTML = html.join("");
 }
 
 function setParkFooter(data) {
     const footerEl = document.querySelector("#park-footer");
     const mailing = data.addresses.find((addr) => addr.type === "Mailing");
     const voice = data.contacts.phoneNumbers.find((num) => num.type === "Voice");
-
-    footerEl.innerHTML = `
-        <section class="contact-info">
-            <h3>Contact Info</h3>
-            <h4>Mailing Address</h4>
-            <p>${mailing.line1}<br>${mailing.city}, ${mailing.stateCode} ${mailing.postalCode}</p>
-            <h4>Phone:</h4>
-            <p>${voice.phoneNumber}</p>
-        </section>`;
+    footerEl.innerHTML = `<h3>Contact Info</h3><p>${mailing.line1}<br>${mailing.city}, ${mailing.stateCode}</p><p>${voice.phoneNumber}</p>`;
 }
 
 init();
