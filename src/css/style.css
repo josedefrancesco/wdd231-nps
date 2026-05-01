@@ -109,9 +109,8 @@ img {
   grid-row: 2/3;
   display: flex;
   align-items: center;
-  gap: 1.5em;
-  padding: 0.8em 1.5em;
-  z-index: 5;
+  gap: 1em;
+  padding: 0.5em 1em;
 }
 
 .hero-banner__title {
@@ -141,20 +140,16 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.8em 2em;
   color: white;
   text-decoration: none;
   font-size: 0.8rem;
 }
 
-.park-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.park-nav .icon {
+.park-nav svg {
   width: 24px;
   height: 24px;
-  margin-top: 5px;
+  fill: white;
 }
 
 main {
@@ -205,29 +200,37 @@ main {
 }
 
 
+/* footer styles */
+
 #park-footer {
-  background-color: var(--bs-grey-5);
-  background-image: url("/images/topo_pattern.png");
-  background-blend-mode: multiply;
-  background-repeat: repeat;
-  color: white;
-  padding: 3rem 2rem;
+    background-color: var(--bs-grey-5);
+    background-image: url("/images/topo_pattern.png");
+    background-blend-mode: multiply;
+    background-repeat: repeat;
+    color: white;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
 }
 
-.contact-info h3 {
-  color: var(--bs-cape-honey);
-  border-bottom: 1px solid var(--bs-grey-6);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+#park-footer h3 {
+    color: var(--bs-cape-honey);
 }
+
+/* Utility styles */
 
 .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.disclaimer {
+  padding: 0 1em;
 }
