@@ -2,8 +2,10 @@ const baseUrl = "https://developer.nps.gov/api/v1/";
 const apiKey = "zSIOcjTjiR1vcByU5Tt33qGlgqreLnSTWASGZzmg";
 
 async function getJson(url) {
-  const finalUrl = `${baseUrl}${url}${url.includes("?") ? "&" : "?"}api_key=${apiKey}`;
+  const separator = url.includes("?") ? "&" : "?";
+  const finalUrl = `${baseUrl}${url}${separator}api_key=${apiKey}`;
   const response = await fetch(finalUrl);
+  
   if (response.ok) {
     const data = await response.json();
     return data;
@@ -19,7 +21,11 @@ export async function getParkData(parkCode) {
 
 export function getInfoLinks(images, parkInfoLinks) {
   return parkInfoLinks.map((link, index) => {
-    link.image = images[index + 2] ? images[index + 2].url : images[0].url;
+    if (images && images.length > 0) {
+      link.image = images[index + 2] ? images[index + 2].url : images[0].url;
+    } else {
+      link.image = "";
+    }
     return link;
   });
 }
