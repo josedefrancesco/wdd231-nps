@@ -1,5 +1,5 @@
 import { getParkData, getInfoLinks } from "./parkService.mjs";
-import parkInfoLinks from "./parkInfo.json";
+import parkInfoLinks from "./parkInfo.json" assert { type: "json" };
 import { setHeaderFooter, setParkIntro, setParkInfoLinks } from "./templates.mjs";
 
 async function init() {
