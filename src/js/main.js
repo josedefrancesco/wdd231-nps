@@ -3,7 +3,7 @@ import parkInfoLinks from "./parkInfo.json";
 import { setHeaderFooter, setParkIntro, setParkInfoLinks } from "./templates.mjs";
 
 async function init() {
-  const parkCode = "glac";
+  const parkCode = "yell";
   try {
     const parkData = await getParkData(parkCode);
     
