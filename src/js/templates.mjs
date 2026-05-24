@@ -1,53 +1,39 @@
-export function mediaCardTemplate(info) {
+import spritePath from '../images/sprite.symbol.svg';
+
+export function alertTemplate(alert) {
+  let alertType = "";
+  
+  switch (alert.category) {
+    case "Park Closure":
+      alertType = "closure";
+      break;
+    default:
+      alertType = alert.category ? alert.category.toLowerCase() : "information";
+  }
+
   return `
-    <div class="media-card">
-        <a href="${info.link}">
-            <img src="${info.image}" alt="${info.name}">
-            <h3>${info.name}</h3>
-        </a>
-        <p>${info.description}</p>
-    </div>`;
-}
-
-export function setHeaderFooter(parkData) {
-  const titleElements = document.querySelectorAll(".park-name");
-  titleElements.forEach((el) => {
-    el.innerText = parkData.fullName;
-  });
-
-  const heroImg = document.querySelector(".hero-banner img");
-  if (heroImg && parkData.images.length > 0) {
-    heroImg.src = parkData.images[0].url;
-    heroImg.alt = parkData.images[0].altText;
-  }
-
-  const footer = document.querySelector("#park-footer");
-  if (footer) {
-    footer.innerHTML = `
-      <div class="footer-info">
-        <p class="park-name">${parkData.fullName}</p>
-        <p>${parkData.designation}</p>
+    <li class="alert">
+      <svg class="icon" focusable="false" aria-hidden="true">
+        <use xlink:href="${spritePath}#alert-${alertType}"></use>
+      </svg>
+      <div>
+        <h3 class="alert-${alertType}">${alert.title}</h3>
+        <p>${alert.description}</p>
       </div>
-      <div class="footer-location">
-        <p>${parkData.states}</p>
-      </div>
-    `;
-  }
+    </li>
+  `;
 }
 
-export function setParkIntro(parkData) {
-  const introSection = document.querySelector(".intro");
-  if (introSection) {
-    introSection.innerHTML = `
-      <h1>${parkData.fullName}</h1>
-      <p>${parkData.description}</p>
-    `;
-  }
+export function visitorCenterTemplate(center) {
+  return `
+    <li class="visitor-center">
+      <h3>${center.name}</h3>
+      <p>${center.description}</p>
+      <p><em>Directions:</em> ${center.directionsInfo}</p>
+    </li>
+  `;
 }
 
-export function setParkInfoLinks(links) {
-  const container = document.querySelector(".info-container");
-  if (container) {
-    container.innerHTML = links.map(mediaCardTemplate).join("");
-  }
+export function activityTemplate(activity) {
+  return `<li>${activity}</li>`; 
 }
