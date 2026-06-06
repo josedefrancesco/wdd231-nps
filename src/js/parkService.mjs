@@ -29,3 +29,14 @@ export async function getVisitorCenterData(parkCode) {
   const url = `${baseUrl}visitorcenters?parkCode=${parkCode}`;
   return await getJson(url);
 }
+
+// NEW FUNCTION: Added to map images with external JSON configuration links
+export function getInfoLinks(images, parkInfoLinks) {
+  // Matches your current implementation requirements from previous weeks
+  return parkInfoLinks.map((link, index) => {
+    return {
+      ...link,
+      image: images[index] ? images[index].url : ""
+    };
+  });
+}
