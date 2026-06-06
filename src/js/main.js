@@ -1,6 +1,6 @@
 import "../css/style.css";
 import { getParkData, getInfoLinks } from "./parkService.mjs";
-import parkInfoLinks from "./parkinfo.json" with { type: "json" };
+import parkInfoLinks from "../parkinfo.json" with { type: "json" };
 import { setHeaderFooter, setParkIntro, setParkInfoLinks } from "./templates.mjs";
 import { enableNavigation } from "./navigation.mjs";
 
